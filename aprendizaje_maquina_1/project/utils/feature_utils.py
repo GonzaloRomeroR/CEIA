@@ -1,4 +1,6 @@
 from sklearn.preprocessing import KBinsDiscretizer
+from sklearn.preprocessing import PowerTransformer, MinMaxScaler
+from sklearn.pipeline import Pipeline
 import numpy as np
 
 
@@ -41,3 +43,14 @@ def get_higher_corr(df, variable, method="pearson"):
     corr = df.corr(method=method)[variable]
     corr = corr.reindex(corr.abs().sort_values(ascending=False).index)
     return corr
+
+
+def box_cox_transform(df, columns, method="box-cox"):
+    pipelines = dict()
+    for column in columns:
+        scaler = MinMaxScaler(feature_range=(1, 2))
+        power = PowerTransformer(method=method)
+        pipeline = Pipeline(steps=[("s", scaler), ("p", power)])
+        df[column] = pipeline.fit_transform(df[column].to_numpy().reshape(-1, 1))
+        pipelines[column] = pipeline
+    return df, pipelines

@@ -48,3 +48,17 @@ def plot_correlation_heatmap(df):
     sns.heatmap(corr, cmap="YlGnBu", mask=mask, square=True, annot=True)
     sns.set(font_scale=0.9)
 
+
+def label_percentage_plot(df, col_x, col_y, y_val, y_label="", x_label=""):
+    percentage = (
+        df[[col_x, col_y]][df[col_y] == y_val].groupby(col_x).count()
+        / df[[col_x, col_y]].groupby(col_x).count()
+    )
+    _, ax = plt.subplots(figsize=(18, 6))
+    plt.xticks(rotation="vertical")
+    ax.bar(df[col_x].value_counts().index, df[col_x].value_counts(), color="lightgrey")
+    ax2 = ax.twinx()
+    ax2.plot(percentage.index, percentage, color="red")
+    ax.set_ylabel(y_label)
+    ax.set_xlabel(x_label)
+    ax2.set_ylabel("Percentage")
