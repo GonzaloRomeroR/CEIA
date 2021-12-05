@@ -3,8 +3,52 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import classification_report
 from functools import wraps
 from time import time
+from timeit import default_timer as timer
 import matplotlib.pyplot as plt
+from utils.plot_utils import plot_roc_curve
 import torch
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+
+def evaluate_model(model, X_train, y_train, X_test, y_test):
+    model.train(X_train, y_train)
+    model.classification_report(X_test, y_test)
+    print("Training time: {} s".format(model.train_time))
+    model.plot_curve(X_test, y_test)
+
+
+class Model:
+    def __init__(self, model_class, params):
+        self.model = model_class(**params)
+        self.train_time = None
+
+    def train(self, X, y):
+        start = timer()
+        self.model.fit(X, y)
+        end = timer()
+        self.train_time = end - start
+
+    def predict(self, X):
+        return self.model.predict(X)
+
+    def classification_report(self, X, y):
+        y_pred = self.predict(X)
+        roc_auc = roc_auc_score(y, y_pred)
+        print("ROC_AUC = {}\n".format(roc_auc))
+        print(classification_report(y, y_pred, digits=5))
+        self.report = classification_report(y, y_pred, digits=5, output_dict=True)
+        return self.report
+
+    def confusion_matrix(self, X, y):
+        y_pred = self.predict(X)
+        cm = confusion_matrix(y, y_pred)
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+        disp.plot()
+        plt.grid(None)
+
+    def plot_curve(self, X, y):
+        y_pred = self.predict(X)
+        plot_roc_curve(y, y_pred)
 
 
 def run_model(model, X_train, y_train, X_test, y_test):
@@ -18,7 +62,7 @@ def run_model(model, X_train, y_train, X_test, y_test):
     return model, roc_auc
 
 
-def fit(model, criterion, optimizer, dataloaders, train_len, test_len, epochs=50):
+def fit_model(model, criterion, optimizer, dataloaders, train_len, test_len, epochs=50):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
     if torch.cuda.is_available():
@@ -26,6 +70,7 @@ def fit(model, criterion, optimizer, dataloaders, train_len, test_len, epochs=50
     losses_train = []
     losses_val = []
     running_loss = 0.0
+    start = timer()
     for epoch in range(epochs):
         model.train()
         running_loss = 0.0
@@ -73,16 +118,6 @@ def fit(model, criterion, optimizer, dataloaders, train_len, test_len, epochs=50
         )
         losses_train.append(running_loss / len(dataloaders["train"]))
         losses_val.append(valid_loss / len(dataloaders["val"]))
-    return losses_train, losses_val
-
-
-def timing(f):
-    @wraps(f)
-    def wrap(*args, **kw):
-        ts = time()
-        result = f(*args, **kw)
-        te = time()
-        time_t = te - ts
-        return result, time_t
-
-    return wrap
+    end = timer()
+    train_time = start - end
+    return losses_train, losses_val, train_time
