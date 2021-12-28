@@ -80,3 +80,18 @@ def plot_roc_curve(y_val, y_pred):
     plt.legend(loc="lower right")
     plt.show()
 
+
+def label_percentage_plot(df, col_x, col_y, y_val, figsize=(18, 6)):
+    percentage = (
+        df[[col_x, col_y]][df[col_y] == y_val].groupby(col_x).count()
+        / df[[col_x, col_y]].groupby(col_x).count()
+    )
+    _, ax = plt.subplots(figsize=figsize)
+    plt.xticks(rotation="vertical")
+    ax.bar(df[col_x].value_counts().index, df[col_x].value_counts(), color="lightgrey")
+    ax2 = ax.twinx()
+    ax2.plot(percentage.index, percentage, color="red")
+    ax.set_ylabel("Quantity")
+    ax.set_xlabel(col_x)
+    ax2.set_ylabel("Percentage")
+
