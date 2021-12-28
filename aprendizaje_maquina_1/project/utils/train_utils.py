@@ -34,6 +34,7 @@ class Model:
     def classification_report(self, X, y):
         y_pred = self.predict(X)
         roc_auc = roc_auc_score(y, y_pred)
+        self.roc_auc = roc_auc
         print("ROC_AUC = {}\n".format(roc_auc))
         print(classification_report(y, y_pred, digits=5))
         self.report = classification_report(y, y_pred, digits=5, output_dict=True)
