@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ml2-gonzalo-romero",
+  "private_key_id": "f1b152bf59f77cbc9cc667ef9f159b2a628c3e78",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC0cWlmkx7s0ZFi\nOzmLyrn6yydf0vxqWRnUs+YU8DMGaYm/cPlYC3qapXPcIveTAB7BAgJMWodg2mMj\ne45DOCjVGb4182aoJ3IbfkusqcOTCDCPcktwHCk9238lis+laPZWPzSUwkKoFxVX\nXkCo9ljt9M9aaVfjzUKqs+6SpVgniuAdHTnZUDt2ruLrpv37r3vuFMxLrdap2Ww/\nsM1b0glKRfqyR7GUFWiYwvcYrEFq6qOyiNXnl+Adoks3WMjsmpjLfawC6vrOdRNE\nIW7ocGL+WBsDrCwj3qUEIfOJNeuDKmKSm0nDloF8As5gFZzncIP3qFQpSBFX7Bxr\nwSH2NAlJAgMBAAECggEACrQsEhJB3D85wjOccCkSU3jb4PSvdcELldkmmcEea7/U\ntKMnXWRP7W7JYsp9uG4CRQWBHKWloHaP+TW9/ImPLYX5iTKDOVAethgNteQ7pmQO\n2mGHrVK0VRepUREtDGU/sKHO9RCZeuZkpRJBoGw9nf7+0mCLnscpMF5cVX1ir3S1\nVNK9uFL9FnS9jBAiYzQ2VfbQTXuWBpRqH0F4/7oPgMySdt5xA1ABNWwzgWzPNom5\nMem/aSoEzraRBn8t2Kzxo4au9a2WxAV0J7gu3Cjym+9PiT4OYVQzJjOidARlS4xv\n8OOR3ikjnQq78Nki7EUHeMy5XlLdIcNejmmdeYejQQKBgQDlqPQ/qyiN5Xuzno+e\n7sz1XGY6UN6bNPKdVl1oV3CJ0Se8i0l124EFjchAj7KDzhGHX8ZuthF3AVYcVwCT\nSWKpENzNiccMvJWJyd6Iy2KdymTxFGneikrY3ng9WaXAxofrshiz/8Do6MEo4eMJ\nti9zUICzu5egq9Iv/4PpmPCrCQKBgQDJI2YGjCzNuvXLwdTTLd5/eoR/zVS53pQJ\nuptxQIfoALLCHpp6dZWYcZqvDYLD76RkAA47ktsexnymQhf3fBnY1OfwRSHTkwxT\n/N5yn3t5oaDWOCYaYE6qJnvclTIx5tZfDP21IrLy95KLVjztsWKIquU0thNyz/Cl\nwWWFAQ68QQKBgFaHFZ93aUwtDjJap1oGNwqqyYlnNrfbdx14kLDjYO9L8mDDSeYx\n0aa6CJzqhyPJ3CjZGPZVercPtdXvobPcjmOMiuSV6H0QAHdtq352wq0YuHdsbYb/\nK7wR9dOHlz/OjR9sdoo67f/S0hQJJ3VdQvt7dUJCh5ptoj+bUaQNj3+hAoGAVnDN\nFwFE/AFeQvwBP+SVm4mGyfnvcJXUXz4AMbK+9ZjfOge28ev4p3QjOxn+WcBykLtp\nYnbhjp9U0IrVC/ocjZAqQZskR24JvUqOOwqJISOyIH4u+eTryboSPyErWkDPXjgS\nDLdl2n9FTnZ4Ztp18zAmovmg8BWnYUT1ISzsLUECgYAw4E2/G2rtm/m7VhB5fL+D\niVfDQFo3+j1yKiaAP7NaIfQx4etxh7IfFtcZssZDNKSr7CSh4r9bfrYMLG0iAJH5\nRU7UOEGLOo2njyXohkUW4Xd27/lgzz6fWGTmZEmV6QMCIkcTjAiw/8jYCZFmYh5o\nkalXfqdDTTrvIeu8jc5C2w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "ml2-project@ml2-gonzalo-romero.iam.gserviceaccount.com",
+  "client_id": "111381798520995017197",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ml2-project%40ml2-gonzalo-romero.iam.gserviceaccount.com"
+}
