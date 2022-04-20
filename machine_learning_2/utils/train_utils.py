@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from utils.plot_utils import plot_roc_curve
 import torch
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import GridSearchCV
 
 
 def evaluate_model(model, X_train, y_train, X_test, y_test):
@@ -15,6 +16,11 @@ def evaluate_model(model, X_train, y_train, X_test, y_test):
     model.classification_report(X_test, y_test)
     print("Training time: {} s".format(model.train_time))
     model.plot_curve(X_test, y_test)
+
+
+def perform_grid_search(model, X_train, y_train, params):
+    model.grid_search(X_train, y_train, params)
+    print("Grid search time: {} s".format(model.grid_time))
 
 
 class Model:
@@ -27,6 +33,15 @@ class Model:
         self.model.fit(X, y)
         end = timer()
         self.train_time = end - start
+
+    def grid_search(self, X, y, params):
+        start = timer()
+        grid = GridSearchCV(self.model, params)
+        grid.fit(X, y)
+        end = timer()
+        self.best_params = grid.best_params_
+        print(self.best_params)
+        self.grid_time = end - start
 
     def predict(self, X):
         return self.model.predict(X)

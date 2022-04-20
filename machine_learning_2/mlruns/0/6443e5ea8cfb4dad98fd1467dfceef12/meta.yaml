@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Laura/Documents/Gonzalo/CEIA/machine_learning_2/mlruns/0/6443e5ea8cfb4dad98fd1467dfceef12/artifacts
+end_time: 1650454107728
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 6443e5ea8cfb4dad98fd1467dfceef12
+run_uuid: 6443e5ea8cfb4dad98fd1467dfceef12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1650454095431
+status: 4
+tags: []
+user_id: Laura
