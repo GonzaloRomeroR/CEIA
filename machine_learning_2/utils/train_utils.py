@@ -7,9 +7,37 @@ from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 from utils.plot_utils import plot_roc_curve
 import torch
+import mlflow
+from urllib.parse import urlparse
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import GridSearchCV
 
+def evaluate_model_mlflow(train_model, X_train, y_train, X_test, y_test, params, models, model_name, experiment_id):
+    with mlflow.start_run(experiment_id=experiment_id, run_name=model_name):
+        
+        model = Model(train_model, {})
+        perform_grid_search(model, X_train, y_train, params)
+
+        params = model.best_params  
+        for param in params:
+            mlflow.log_param(param, params[param])
+
+        model = Model(train_model, params)
+        evaluate_model(model, X_train, y_train, X_test, y_test)
+        models[model_name] = model
+
+        mlflow.log_metric("auc", model.roc_auc)
+        mlflow.log_metric("precision", model.report["weighted avg"]["precision"])
+        mlflow.log_metric("recall", model.report["weighted avg"]["recall"])
+        mlflow.log_metric("f1-score", model.report["weighted avg"]["f1-score"])
+
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(model, model_name, registered_model_name="model")
+        else:
+            mlflow.sklearn.log_model(model, model_name)
+        
+        return model
 
 def evaluate_model(model, X_train, y_train, X_test, y_test):
     model.train(X_train, y_train)
